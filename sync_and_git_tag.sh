@@ -45,10 +45,10 @@ function get_latest_portage_snapshot()
     portage_snapshot_path="${2}"
     portage_snapshot_file="${3}"
     local_portage_dir="${4}"
-#     [[ -e ${portage_snapshot_file} ]] && rm -f ${portage_snapshot_file}*
-#     wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}
-#     wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.gpgsig
-#     wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.md5sum
+    [[ -e ${portage_snapshot_file} ]] && rm -f ${portage_snapshot_file}*
+    wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}
+    wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.gpgsig
+    wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.md5sum
     md5sum -c ${portage_snapshot_file}.md5sum || die "md5sum does not match!"
 
     # Remove old directories, extract new and move to wanted location
