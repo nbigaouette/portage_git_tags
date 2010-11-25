@@ -39,9 +39,7 @@ function die()
 function get_latest_portage_snapshot()
 {
     if [[ ${#@} -ne 4 ]]; then
-        echo "ERROR: get_latest_portage_snapshot() function takes exactly 4 arguments!"
-        echo "Current arguments: ${@}"
-        return
+        die "ERROR: get_latest_portage_snapshot() function takes exactly 4 arguments!\nCurrent arguments: ${@}"
     fi
     mirror="${1}"
     portage_snapshot_path="${2}"
@@ -63,9 +61,7 @@ function get_latest_portage_snapshot()
 function rsync_portage()
 {
     if [[ ${#@} -ne 3 ]]; then
-        echo "ERROR: rsync_portage() function takes exactly 2 arguments!"
-        echo "Current arguments: ${@}"
-        return
+        die "ERROR: rsync_portage() function takes exactly 2 arguments!\nCurrent arguments: ${@}"
     fi
     PORTAGE_RSYNC_OPTS="${1}"
     rsync_mirror="${2}"
@@ -76,9 +72,7 @@ function rsync_portage()
 function init_git_repo()
 {
     if [[ ${#@} -ne 1 ]]; then
-        echo "ERROR: init_git_repo() function takes exactly 1 arguments!"
-        echo "Current arguments: ${@}"
-        return
+        die "ERROR: init_git_repo() function takes exactly 1 arguments!\nCurrent arguments: ${@}"
     fi
     cd ${local_portage_dir}
     if [[ ! -d .git ]]; then
