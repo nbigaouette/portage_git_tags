@@ -92,7 +92,7 @@ function sync_and_git_tag()
     if [[ -d ${local_portage_dir} ]]; then
         # If directory already exists, use rsync to update
         echo "Directory ${local_portage_dir} already exists, updating using rsync..."
-        rsync_portage ${PORTAGE_RSYNC_OPTS} ${rsync_mirror} ${local_portage_dir}
+        rsync_portage "${PORTAGE_RSYNC_OPTS}" ${rsync_mirror} ${local_portage_dir}
     else
         # If directory does not exists, get a tarbal snapshot and extract
         echo "Directory ${local_portage_dir} does not exists, downloading tarbal and extracting..."
