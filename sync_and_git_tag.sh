@@ -47,9 +47,10 @@ function get_latest_portage_snapshot()
     portage_snapshot_path="${2}"
     portage_snapshot_file="${3}"
     local_portage_dir="${4}"
-    wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}
-    wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.gpgsig
-    wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.md5sum
+#     [[ -e ${portage_snapshot_file} ]] && rm -f ${portage_snapshot_file}
+#     wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}
+#     wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.gpgsig
+#     wget ${mirror}/${portage_snapshot_path}/${portage_snapshot_file}.md5sum
     md5sum -c ${portage_snapshot_file}.md5sum || die "md5sum does not match!"
 
     # Remove old directories, extract new and move to wanted location
@@ -88,8 +89,15 @@ function init_git_repo()
 function sync_and_git_tag()
 {
     # Sync local portage tree
-    #get_latest_portage_snapshot ${mirror} ${portage_snapshot_path} ${portage_snapshot_file} ${local_portage_dir}
-    rsync_portage ${PORTAGE_RSYNC_OPTS} ${rsync_mirror} ${local_portage_dir}
+    if [[ -d ${local_portage_dir} ]]; then
+        # If directory already exists, use rsync to update
+        echo "Directory ${local_portage_dir} already exists, updating using rsync..."
+        rsync_portage ${PORTAGE_RSYNC_OPTS} ${rsync_mirror} ${local_portage_dir}
+    else
+        # If directory does not exists, get a tarbal snapshot and extract
+        echo "Directory ${local_portage_dir} does not exists, downloading tarbal and extracting..."
+        get_latest_portage_snapshot ${mirror} ${portage_snapshot_path} ${portage_snapshot_file} ${local_portage_dir}
+    fi
 
     init_git_repo ${local_portage_dir}
 
