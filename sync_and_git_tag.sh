@@ -32,7 +32,7 @@ now=`date +%Y%m%d_%Hh%M`
 
 function die()
 {
-    echo "${@}"
+    echo -e "${@}"
     exit
 }
 
