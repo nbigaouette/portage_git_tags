@@ -98,11 +98,19 @@ function sync_and_git_tag()
 
     init_git_repo ${local_portage_dir}
 
-    # Add to git
     cd ${local_portage_dir}
-    git add *
-    git commit -a -m "Automatic portage git commit - ${now}"
-    git tag ${now}
+    nothing_to_commit=`git status | grep "nothing to commit"`
+    if [[ "${nothing_to_commit}" == "nothing to commit (working directory clean)" ]]; then
+        echo "No change since last sync, skipping tag."
+    else
+        # Add to git
+        echo "Adding portage files to git repo..."
+        git add *
+        echo "Committing..."
+        git commit -a -m "Automatic portage git commit - ${now}"
+        echo "Tagging as \"${now}\"..."
+        git tag ${now}
+    fi
     cd -
 }
 
