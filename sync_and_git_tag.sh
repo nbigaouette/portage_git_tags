@@ -78,6 +78,7 @@ function init_git_repo()
     if [[ ! -d .git ]]; then
         git init
     fi
+    cd -
 }
 
 function sync_and_git_tag()
