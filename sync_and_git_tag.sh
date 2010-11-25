@@ -81,3 +81,5 @@ function sync_and_git_tag()
     git tag ${now}
 }
 
+# Run it!
+sync_and_git_tag
