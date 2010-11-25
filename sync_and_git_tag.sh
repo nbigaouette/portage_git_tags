@@ -66,7 +66,9 @@ function rsync_portage()
     PORTAGE_RSYNC_OPTS="${1}"
     rsync_mirror="${2}"
     local_portage_dir="${3}"
+    [[ -d ${local_portage_dir}/.git ]]  && mv ${local_portage_dir}/.git ./${local_portage_dir}_git
     rsync ${PORTAGE_RSYNC_OPTS} ${rsync_mirror} ${local_portage_dir}
+    [[ -d ./${local_portage_dir}_git ]] && mv ./${local_portage_dir}_git ${local_portage_dir}/.git
 }
 
 function init_git_repo()
