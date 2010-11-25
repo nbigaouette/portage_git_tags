@@ -54,7 +54,7 @@ function get_latest_portage_snapshot()
     # Remove old directories, extract new and move to wanted location
     [[ "${local_portage_dir}" != "portage" ]] && rm -fr portage
     rm -fr ${local_portage_dir}/*
-    tar xvjf ${portage_snapshot_file}
+    tar xjf ${portage_snapshot_file}
     [[ "${local_portage_dir}" != "portage" ]] && mv portage/* ${local_portage_dir}/
 }
 
