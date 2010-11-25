@@ -24,9 +24,9 @@ local_portage_dir="portage"
 rsync_mirror="rsync://rsync.gentoo.org/gentoo-portage"
 PORTAGE_RSYNC_OPTS="--recursive --links --safe-links --perms --times --compress --force --whole-file --delete --stats --timeout=180 --exclude=/distfiles --exclude=/local --exclude=/packages"
 
-# mirror="http://gentoo.arcticnetwork.ca"
-# portage_snapshot_path="snapshots"
-# portage_snapshot_file="portage-latest.tar.bz2"
+mirror="http://gentoo.arcticnetwork.ca"
+portage_snapshot_path="snapshots"
+portage_snapshot_file="portage-latest.tar.bz2"
 
 now=`date +%Y%m%d_%Hh%M`
 
